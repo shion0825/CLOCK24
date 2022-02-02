@@ -83,39 +83,39 @@ always @(posedge CLK) begin
 	if( cnt == 11'd4799 ) begin
 		cnt <= 11'b0;
 
-	case( count )
-		2'h0: begin
-			DIG <= 4'b1000;
-			HEX0 <= SEG7DEC2( MINL , MINON );
-			HEX1 <= SEG7DEC2( MINL1 , MINON1 );
-		end
-		2'h1: begin
-			DIG <= 4'b0100; 
-			HEX0 <= SEG7DEC2( MINH , MINON );
-			HEX1 <= SEG7DEC2( MINH1 , MINON1 );
-		end
-		2'h2: begin
-			DIG <= 4'b0010;
-			HEX0 <= SEG7DEC2( HOURL , HOURON );
-			HEX1 <= SEG7DEC2( HOURL1 , HOURON1 );
-		end
-		2'h3: begin
-			DIG <= 4'b0001;
-			HEX0 <= SEG7DEC2( HOURH , HOURON );
-			HEX1 <= SEG7DEC2( HOURH1 , HOURON1 );
-		end
-		default: begin
-			count <= 2'b00;
-			DIG <= 4'b0001;
-			HEX0 <= 7'b1010101;
-			HEX1 <= 7'b1010101;
-		end
-	endcase	
+		case( count )
+			2'h0: begin
+				DIG <= 4'b1000;
+				HEX0 <= SEG7DEC2( MINL , MINON );
+				HEX1 <= SEG7DEC2( MINL1 , MINON1 );
+			end
+			2'h1: begin
+				DIG <= 4'b0100; 
+				HEX0 <= SEG7DEC2( MINH , MINON );
+				HEX1 <= SEG7DEC2( MINH1 , MINON1 );
+			end
+			2'h2: begin
+				DIG <= 4'b0010;
+				HEX0 <= SEG7DEC2( HOURL , HOURON );
+				HEX1 <= SEG7DEC2( HOURL1 , HOURON1 );
+			end
+			2'h3: begin
+				DIG <= 4'b0001;
+				HEX0 <= SEG7DEC2( HOURH , HOURON );
+				HEX1 <= SEG7DEC2( HOURH1 , HOURON1 );
+			end
+			default: begin
+				count <= 2'b00;
+				DIG <= 4'b0001;
+				HEX0 <= 7'b1111111;
+				HEX1 <= 7'b1111111;
+			end
+		endcase	
 		
-	if ( count == 2'b11 )
-		count <= 2'b00;
-	else
-		count <= count + 2'b01;
+		if ( count == 2'b11 )
+			count <= 2'b00;
+		else
+			count <= count + 2'b01;
 	end
 
 	if( (MINH == MINH1) && (MINL == MINL1) && (HOURH == HOURH1) && (HOURL == HOURL1) )
